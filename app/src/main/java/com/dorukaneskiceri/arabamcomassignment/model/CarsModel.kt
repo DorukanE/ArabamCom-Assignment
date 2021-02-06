@@ -5,25 +5,25 @@ import com.google.gson.annotations.SerializedName
 
 data class CarsModel(
     @SerializedName("id")
-    val advertisementId: Long,
+    val advertisementId: Long?,
     @SerializedName("title")
-    val advertisementTitle: String,
+    val advertisementTitle: String?,
     @SerializedName("location")
-    val advertisementLocation: CarsLocationModel,
+    val advertisementLocation: CarsLocationModel?,
     @SerializedName("category")
-    val advertisementCategory: CarsCategory,
+    val advertisementCategory: CarsCategory?,
     @SerializedName("modelName")
-    val advertisementModelName: String,
+    val advertisementModelName: String?,
     @SerializedName("price")
-    val advertisementPrice: Long,
+    val advertisementPrice: Long?,
     @SerializedName("priceFormatted")
-    val advertisementPriceFormatted: String,
+    val advertisementPriceFormatted: String?,
     @SerializedName("date")
-    val advertisementDate: String,
+    val advertisementDate: String?,
     @SerializedName("dateFormatted")
-    val advertisementDateFormatted: String,
+    val advertisementDateFormatted: String?,
     @SerializedName("photo")
-    val advertisementPhoto: String,
+    val advertisementPhoto: String?,
     @SerializedName("properties")
-    val advertisementProperties: List<CarsProperties>
+    val advertisementProperties: List<CarsProperties>?
 )

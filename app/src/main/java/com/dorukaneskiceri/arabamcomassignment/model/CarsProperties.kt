@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CarsProperties(
     @SerializedName("name")
-    val propertyName: String,
+    val propertyName: String?,
     @SerializedName("value")
-    val propertyValue: String
+    val propertyValue: String?
 )

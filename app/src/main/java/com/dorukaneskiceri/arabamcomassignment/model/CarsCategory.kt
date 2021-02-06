@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CarsCategory(
     @SerializedName("id")
-    val categoryId: Int,
+    val categoryId: Int?,
     @SerializedName("name")
-    val categoryName: String
+    val categoryName: String?
 )
