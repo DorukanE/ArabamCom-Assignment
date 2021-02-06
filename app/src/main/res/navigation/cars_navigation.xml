@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cars_navigation"
+    app:startDestination="@id/listCarsFragment">
+
+    <fragment
+        android:id="@+id/listCarsFragment"
+        android:name="com.dorukaneskiceri.arabamcomassignment.ListCarsFragment"
+        android:label="fragment_list_cars"
+        tools:layout="@layout/fragment_list_cars" >
+        <action
+            android:id="@+id/action_listCarsFragment_to_carsDetailFragment2"
+            app:destination="@id/carsDetailFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/carsDetailFragment"
+        android:name="com.dorukaneskiceri.arabamcomassignment.CarsDetailFragment"
+        android:label="fragment_cars_detail"
+        tools:layout="@layout/fragment_cars_detail" >
+        <argument
+            android:name="carUuid"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>
