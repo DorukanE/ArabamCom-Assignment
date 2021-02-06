@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listCarsFragment"
-        android:name="com.dorukaneskiceri.arabamcomassignment.ListCarsFragment"
+        android:name="com.dorukaneskiceri.arabamcomassignment.view.ListCarsFragment"
         android:label="fragment_list_cars"
         tools:layout="@layout/fragment_list_cars" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/carsDetailFragment"
-        android:name="com.dorukaneskiceri.arabamcomassignment.CarsDetailFragment"
+        android:name="com.dorukaneskiceri.arabamcomassignment.view.CarsDetailFragment"
         android:label="fragment_cars_detail"
         tools:layout="@layout/fragment_cars_detail" >
         <argument
