@@ -7,10 +7,11 @@ import com.dorukaneskiceri.arabamcomassignment.service.CarsListService
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class CarsListViewModel(application: Application): BaseViewModel(application) {
+class CarsListViewModel(application: Application) : BaseViewModel(application) {
 
     val carsList = MutableLiveData<List<CarsModel>>()
     val loadingState = MutableLiveData<Boolean>()
@@ -18,7 +19,7 @@ class CarsListViewModel(application: Application): BaseViewModel(application) {
     private val disposable = CompositeDisposable()
     private val carsApiService = CarsListService()
 
-    fun getCarsList(take: Int, skip: Int){
+    fun getCarsList(take: Int, skip: Int) {
         getDataFromAPI(take, skip)
     }
 
@@ -28,18 +29,19 @@ class CarsListViewModel(application: Application): BaseViewModel(application) {
             carsApiService.getCarsFromAPI(take, skip)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<List<CarsModel>>(){
-                    override fun onSuccess(t: List<CarsModel>) {
-                        loadingState.value = false
-                        carsList.value = t
-                    }
+                .subscribeWith(object : DisposableSingleObserver<List<CarsModel>>() {
 
                     override fun onError(e: Throwable) {
-                        loadingState.value = false
                         errorState.value = true
+                        loadingState.value = false
                         println(e.localizedMessage)
                     }
 
+                    override fun onSuccess(t: List<CarsModel>) {
+                        println("Process started")
+                        loadingState.value = false
+                        carsList.value = t
+                    }
                 })
         )
     }

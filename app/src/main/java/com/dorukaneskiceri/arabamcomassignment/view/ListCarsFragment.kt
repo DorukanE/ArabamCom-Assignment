@@ -21,9 +21,11 @@ class ListCarsFragment : Fragment() {
     private lateinit var carsListViewModel: CarsListViewModel
     private val adapter = RecyclerAdapterCars(arrayListOf())
     private var isScrolling = false
-    private var currentItems: Int = 0
-    private var totalItems: Int = 0
-    private var scrollOutItems: Int = 0
+    private var take = 10
+    private var skip = 0
+    private var currentItems = 1
+    private var totalItems = 1
+    private var scrollOutItems = 0
 
 
     override fun onCreateView(
@@ -40,8 +42,14 @@ class ListCarsFragment : Fragment() {
         carsListViewModel = ViewModelProviders.of(this).get(CarsListViewModel::class.java)
 
         recyclerViewCars.layoutManager = LinearLayoutManager(view.context)
-        carsListViewModel.getCarsList(10,10)
+        carsListViewModel.getCarsList(take,0)
         recyclerViewCars.adapter = adapter
+
+        swipeRefreshLayout.setOnRefreshListener {
+            skip+=take
+            carsListViewModel.getCarsList(take,skip)
+            swipeRefreshLayout.isRefreshing = false
+        }
 
         recyclerViewCars.addOnScrollListener(object: RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -52,7 +60,8 @@ class ListCarsFragment : Fragment() {
 
                 if(isScrolling && (currentItems + scrollOutItems == totalItems)){
                     isScrolling = false
-                    carsListViewModel.getCarsList(10, 10)
+                    skip += take
+                    carsListViewModel.getCarsList(take, skip)
                 }
             }
 

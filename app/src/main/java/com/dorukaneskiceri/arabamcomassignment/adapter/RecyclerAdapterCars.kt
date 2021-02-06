@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dorukaneskiceri.arabamcomassignment.R
 import com.dorukaneskiceri.arabamcomassignment.model.CarsModel
+import com.dorukaneskiceri.arabamcomassignment.util.downloadImage
 import kotlinx.android.synthetic.main.recyclerview_cars.view.*
 
 class RecyclerAdapterCars(private val arrayListCars: ArrayList<CarsModel>) :
@@ -19,7 +20,8 @@ class RecyclerAdapterCars(private val arrayListCars: ArrayList<CarsModel>) :
         holder.view.textViewPrice.text = arrayListCars[position].advertisementPriceFormatted
         holder.view.textViewTitle.text = arrayListCars[position].advertisementTitle
         holder.view.textViewLocation.text =
-            arrayListCars[position].advertisementLocation?.cityName + arrayListCars[position].advertisementLocation?.townName
+            arrayListCars[position].advertisementLocation?.cityName + " / " + arrayListCars[position].advertisementLocation?.townName
+        holder.view.imageViewCar.downloadImage(arrayListCars[position].advertisementPhoto, holder.view.context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarsHolder {

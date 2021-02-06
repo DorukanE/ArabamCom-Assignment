@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#CCCCCC"
     app:cardCornerRadius="4dp">
 
 
     <ImageView
         android:id="@+id/imageViewCar"
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:layout_height="80dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -23,9 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="38dp"
         android:fontFamily="sans-serif-medium"
+        android:maxEms="14"
         android:text="Başlık"
+        android:textColor="#000000"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLocation"
         app:layout_constraintStart_toEndOf="@+id/imageViewCar"
         app:layout_constraintTop_toTopOf="@+id/imageViewCar" />
 
@@ -36,6 +41,7 @@
         android:layout_marginStart="8dp"
         android:fontFamily="sans-serif"
         android:text="Konum"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/imageView" />
 
@@ -51,12 +57,24 @@
         android:id="@+id/textViewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="Fiyat"
         android:textColor="#AF2121"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
