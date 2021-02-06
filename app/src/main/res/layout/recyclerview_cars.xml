@@ -19,12 +19,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewDescription"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Açıklama"
+        android:text="Başlık"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewCar"
         app:layout_constraintTop_toTopOf="@+id/imageViewCar" />
@@ -44,11 +44,11 @@
         android:layout_width="17dp"
         android:layout_height="17dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewCar"
-        app:layout_constraintStart_toStartOf="@+id/textViewDescription"
+        app:layout_constraintStart_toStartOf="@+id/textViewTitle"
         app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
