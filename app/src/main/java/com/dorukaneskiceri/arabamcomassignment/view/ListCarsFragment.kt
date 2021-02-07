@@ -21,12 +21,9 @@ class ListCarsFragment : Fragment() {
     private lateinit var carsListViewModel: CarsListViewModel
     private val adapter = RecyclerAdapterCars(arrayListOf())
     private var isScrolling = false
-    private var take = 10
+    private var take = 20
     private var skip = 0
-    private var currentItems = 1
-    private var totalItems = 1
-    private var scrollOutItems = 0
-
+    private var isRefreshed = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +38,14 @@ class ListCarsFragment : Fragment() {
 
         carsListViewModel = ViewModelProviders.of(this).get(CarsListViewModel::class.java)
 
-        recyclerViewCars.layoutManager = LinearLayoutManager(view.context)
+        recyclerViewCars.layoutManager = LinearLayoutManager(requireContext())
         carsListViewModel.getCarsList(take,0)
         recyclerViewCars.adapter = adapter
 
         swipeRefreshLayout.setOnRefreshListener {
-            skip+=take
+            isRefreshed = true
+            isRefreshed = observe(isRefreshed)
+            skip = 0
             carsListViewModel.getCarsList(take,skip)
             swipeRefreshLayout.isRefreshing = false
         }
@@ -54,11 +53,8 @@ class ListCarsFragment : Fragment() {
         recyclerViewCars.addOnScrollListener(object: RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                currentItems = LinearLayoutManager(view.context).childCount
-                totalItems = LinearLayoutManager(view.context).itemCount
-                scrollOutItems = LinearLayoutManager(view.context).findFirstVisibleItemPosition()
 
-                if(isScrolling && (currentItems + scrollOutItems == totalItems)){
+                if(isScrolling && isLastVisible()){
                     isScrolling = false
                     skip += take
                     carsListViewModel.getCarsList(take, skip)
@@ -73,13 +69,20 @@ class ListCarsFragment : Fragment() {
             }
         })
 
-        observe()
+        observe(isRefreshed)
     }
 
-    private fun observe() {
+    fun isLastVisible(): Boolean{
+        val layoutManager = recyclerViewCars.layoutManager as LinearLayoutManager
+        val pos = layoutManager.findLastCompletelyVisibleItemPosition()
+        val numItems = adapter.itemCount
+        return (pos >= numItems - 1)
+    }
+
+    private fun observe(isRefreshed: Boolean): Boolean {
         carsListViewModel.carsList.observe(viewLifecycleOwner, { carsList ->
             carsList?.let {
-                adapter.updateLayout(it)
+                adapter.updateLayout(it, isRefreshed)
             }
         })
 
@@ -103,5 +106,7 @@ class ListCarsFragment : Fragment() {
                 }
             }
         })
+
+        return false
     }
 }

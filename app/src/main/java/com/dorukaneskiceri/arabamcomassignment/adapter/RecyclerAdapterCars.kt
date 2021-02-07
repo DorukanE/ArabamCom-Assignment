@@ -34,9 +34,17 @@ class RecyclerAdapterCars(private val arrayListCars: ArrayList<CarsModel>) :
 
     }
 
-    fun updateLayout(listCars: List<CarsModel>) {
-        arrayListCars.clear()
-        arrayListCars.addAll(listCars)
-        notifyDataSetChanged()
+    fun updateLayout(listCars: List<CarsModel>, isRefreshed: Boolean): Boolean {
+        if(isRefreshed){
+            arrayListCars.clear()
+            arrayListCars.addAll(listCars)
+            notifyDataSetChanged()
+            return false
+        }else{
+            arrayListCars.addAll(listCars)
+            notifyDataSetChanged()
+            return false
+        }
     }
+
 }
