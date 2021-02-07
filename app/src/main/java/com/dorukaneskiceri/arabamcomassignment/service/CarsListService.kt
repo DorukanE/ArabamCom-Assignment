@@ -1,6 +1,5 @@
 package com.dorukaneskiceri.arabamcomassignment.service
 
-import com.dorukaneskiceri.arabamcomassignment.model.CarsModel
 import com.dorukaneskiceri.arabamcomassignment.util.Util
 import io.reactivex.Single
 import retrofit2.Retrofit

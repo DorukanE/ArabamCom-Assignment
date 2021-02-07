@@ -2,14 +2,13 @@ package com.dorukaneskiceri.arabamcomassignment.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.dorukaneskiceri.arabamcomassignment.model.CarsModel
+import com.dorukaneskiceri.arabamcomassignment.service.CarsModel
 import com.dorukaneskiceri.arabamcomassignment.service.CarsListService
-import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
 class CarsListViewModel(application: Application) : BaseViewModel(application) {
 
@@ -38,12 +37,30 @@ class CarsListViewModel(application: Application) : BaseViewModel(application) {
                     }
 
                     override fun onSuccess(t: List<CarsModel>) {
-                        println("Process started")
-                        loadingState.value = false
-                        carsList.value = t
+                        //storeInRoom(t)
+                        showCars(t)
                     }
                 })
         )
+    }
+
+//    private fun storeInRoom(carsList: List<CarsModel>){
+//        launch {
+//            val dao = CarsDatabase(getApplication()).carsDao()
+//            dao.deleteAdvertisements()
+//            val longList = dao.insertAllAdvertisements(*carsList.toTypedArray())
+//            var i = 0
+//            while (i < longList.size){
+//                carsList[i].advertisementUuid = longList[i]
+//                i++
+//            }
+//        }
+//        showCars(carsList)
+//    }
+
+    private fun showCars(carsList: List<CarsModel>) {
+        loadingState.value = false
+        this.carsList.value = carsList
     }
 
     override fun onCleared() {
