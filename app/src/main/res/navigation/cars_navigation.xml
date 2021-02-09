@@ -23,7 +23,6 @@
         tools:layout="@layout/fragment_cars_detail" >
         <argument
             android:name="carUuid"
-            app:argType="integer"
-            android:defaultValue="0" />
+            app:argType="long" />
     </fragment>
 </navigation>

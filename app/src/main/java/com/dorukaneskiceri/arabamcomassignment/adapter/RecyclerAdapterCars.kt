@@ -4,15 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.dorukaneskiceri.arabamcomassignment.R
 import com.dorukaneskiceri.arabamcomassignment.databinding.RecyclerviewCarsBinding
 import com.dorukaneskiceri.arabamcomassignment.service.CarsModel
 import com.dorukaneskiceri.arabamcomassignment.util.downloadImage
+import com.dorukaneskiceri.arabamcomassignment.view.ListCarsFragmentDirections
 import kotlinx.android.synthetic.main.recyclerview_cars.view.*
 
 class RecyclerAdapterCars(private val arrayListCars: ArrayList<CarsModel>) :
-    RecyclerView.Adapter<RecyclerAdapterCars.CarsHolder>() {
+    RecyclerView.Adapter<RecyclerAdapterCars.CarsHolder>(), AdvertClickListener {
 
     override fun getItemCount(): Int {
         return arrayListCars.size
@@ -20,6 +22,7 @@ class RecyclerAdapterCars(private val arrayListCars: ArrayList<CarsModel>) :
 
     override fun onBindViewHolder(holder: CarsHolder, position: Int) {
         holder.view.cars = arrayListCars[position]
+        holder.view.clickListener = this
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarsHolder {
@@ -30,6 +33,12 @@ class RecyclerAdapterCars(private val arrayListCars: ArrayList<CarsModel>) :
 
     class CarsHolder(val view: RecyclerviewCarsBinding) : RecyclerView.ViewHolder(view.root) {
 
+    }
+
+    override fun setAdvertClickListener(it: View) {
+        val uuid = it.textViewUuid.text.toString().toLong()
+        val action = ListCarsFragmentDirections.actionListCarsFragmentToCarsDetailFragment2(uuid)
+        Navigation.findNavController(it).navigate(action)
     }
 
     fun updateLayout(listCars: List<CarsModel>, isRefreshed: Boolean): Boolean {

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="cars"
             type="com.dorukaneskiceri.arabamcomassignment.service.CarsModel" />
+
+        <variable
+            name="clickListener"
+            type="com.dorukaneskiceri.arabamcomassignment.adapter.AdvertClickListener" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#CCCCCC"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="4dp"
+        android:onClick="@{clickListener::setAdvertClickListener}">
 
 
         <ImageView
@@ -83,6 +88,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewLocation" />
+
+        <TextView
+            android:id="@+id/textViewUuid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(cars.advertisementUuid)}"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
