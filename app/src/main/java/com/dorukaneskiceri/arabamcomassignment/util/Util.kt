@@ -1,7 +1,9 @@
 package com.dorukaneskiceri.arabamcomassignment.util
 
 import android.content.Context
+import android.media.Image
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
@@ -33,4 +35,9 @@ fun imagePlaceHolder(context: Context): CircularProgressDrawable {
         centerRadius = 40f
         start()
     }
+}
+
+@BindingAdapter(value = ["android:downloadUrl"])
+fun getImage(view: ImageView, url: String?){
+    view.downloadImage(url, view.context)
 }
