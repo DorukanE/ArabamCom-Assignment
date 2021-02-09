@@ -24,5 +24,10 @@
         <argument
             android:name="carUuid"
             app:argType="long" />
+        <action
+            android:id="@+id/action_carsDetailFragment_to_listCarsFragment"
+            app:destination="@id/listCarsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
     </fragment>
 </navigation>

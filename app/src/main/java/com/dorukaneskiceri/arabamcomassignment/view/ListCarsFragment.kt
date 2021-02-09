@@ -41,6 +41,7 @@ class ListCarsFragment : Fragment() {
         recyclerViewCars.layoutManager = LinearLayoutManager(requireContext())
         carsListViewModel.getCarsList(take,0)
         recyclerViewCars.adapter = adapter
+        observe(isRefreshed)
 
         swipeRefreshLayout.setOnRefreshListener {
             isRefreshed = true
@@ -68,8 +69,6 @@ class ListCarsFragment : Fragment() {
                 }
             }
         })
-
-        observe(isRefreshed)
     }
 
     fun isLastVisible(): Boolean{

@@ -2,6 +2,7 @@ package com.dorukaneskiceri.arabamcomassignment.service
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 @Entity
 data class CarsModel(
